@@ -33,7 +33,6 @@ def main():
     parser.add_argument("-e", "--epochs", type=int, default=50, help="default=50")
     parser.add_argument("-a", "--augmentation", type=str, default="hard", help="default=hard, medium light safe")
     parser.add_argument("-w", "--workers", type=int, default=1, help="default=6")
-    parser.add_argument("--optim", type=str, default="Adam", help="Optimizer, default: Adam")
     # Dirs
     parser.add_argument("-d", "--dataset", type=str, required=True, help="path where dataset is placed")
     # Если хотим взять данные из нескольких наборов, нужно собрать в .txt файл список файлов из всех папок images,
