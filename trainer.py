@@ -119,7 +119,9 @@ class SegmentationTrainer:
         ])
 
         # self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, self.epochs_count)
-        self._scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=10, gamma=0.9)
+        self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=self.epochs_count // 2)
+
+        # self._scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=10, gamma=0.9)
 
         self._train_epoch = smp_utils.train.TrainEpoch(
             self._model,
