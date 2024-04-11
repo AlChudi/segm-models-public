@@ -118,8 +118,8 @@ class SegmentationTrainer:
             dict(params=self._model.parameters(), lr=learning_rate),
         ])
 
-        # self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, self.epochs_count)
-        self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=self.epochs_count // 2)
+        self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, self.epochs_count)
+        # self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=self.epochs_count // 2)
 
         # self._scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=10, gamma=0.9)
 
