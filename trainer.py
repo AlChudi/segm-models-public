@@ -33,6 +33,7 @@ class SegmentationTrainer:
             valid_batch_size=2,
             train_workers_count=1,
             valid_workers_count=1,
+            optimizer_name='Adam',
     ):
         self.encoder_name = encoder_name
         self.model_name = model_name
@@ -114,9 +115,12 @@ class SegmentationTrainer:
             smp_utils.metrics.IoU(threshold=0.5),
         ]
 
-        self._optimizer = torch.optim.Adam([
-            dict(params=self._model.parameters(), lr=learning_rate),
-        ])
+        if optimizer_name.lower() == "adam":
+            self._optimizer = torch.optim.Adam(self._model.parameters(), lr=learning_rate)
+        elif optimizer_name.lower() == "nadam":
+            self._optimizer = torch.optim.NAdam(self._model.parameters(), lr=learning_rate)
+        else:
+            raise ValueError(f"Unrecognized optimizer: {optimizer_name}")
 
         self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, self.epochs_count)
         # self._scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=self.epochs_count // 2)
