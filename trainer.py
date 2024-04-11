@@ -114,7 +114,7 @@ class SegmentationTrainer:
             smp_utils.metrics.IoU(threshold=0.5),
         ]
 
-       self._optimizer = torch.optim.Adam([
+        self._optimizer = torch.optim.Adam([
             dict(params=self._model.parameters(), lr=learning_rate),
         ])
 
